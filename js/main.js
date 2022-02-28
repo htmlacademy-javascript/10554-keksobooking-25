@@ -11,7 +11,7 @@ function getRandomInteger(min, max) {
 getRandomInteger(25, 10);
 
 
-function getRandomFractional(min, max, symbolsCount) {
+function getRandomFractional(min, max, symbolsCount = 1) {
   if(min >= max){
     const numSaver = min;
     min = max;
