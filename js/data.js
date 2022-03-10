@@ -27,16 +27,16 @@ const createLocation = (randomLat, randomLng) => ({
 });
 
 const createOffer = (randomLat, randomLng) => ({
-  title: 'Cute flat',
+  title: 'Супер хата',
   address: `${randomLat}, ${randomLng}`,
   price: getRandomInteger(0, 99999),
   type: getArrayRandElement(apartmentTypes),
   rooms: getRandomInteger(1, 6),
-  quests: getRandomInteger(1, 50),
+  guests: getRandomInteger(1, 50),
   checkin: getArrayRandElement(checkTimeItems),
   checkout: getArrayRandElement(checkTimeItems),
   features: getArrayRandElementsList(featureItems),
-  description: 'Description about cute flat',
+  description: 'Супер хата для супер котов и кошек',
   photos: getArrayRandElementsList(photoLinks)
 });
 
