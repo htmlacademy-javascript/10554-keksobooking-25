@@ -1,3 +1,3 @@
-import {getSimilarObjects} from './data.js';
+import {createCard} from './create-card.js';
 
-console.log(getSimilarObjects());
+createCard();
