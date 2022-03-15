@@ -1,3 +1,7 @@
-import {createCard} from './create-card.js';
+import { createCard } from './create-card.js';
+import { getSimilarObjects } from './data.js';
 
-createCard();
+const similarCards = getSimilarObjects();
+
+createCard(similarCards[0]);
+
