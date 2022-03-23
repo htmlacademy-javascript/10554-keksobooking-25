@@ -1,4 +1,3 @@
-const cardsList = document.querySelector('#map-canvas');
 const similarCardTemplate = document.querySelector('#card').content.querySelector('.popup');
 const similarPhotoTemplate = similarCardTemplate.querySelector('.popup__photo');
 const typeHousing = {
@@ -40,7 +39,8 @@ const createCard = (data) => {
   generateFeatures(cardElement.querySelectorAll('.popup__features .popup__feature'), data);
   cardElement.querySelector('.popup__description').textContent = data.offer.description;
   generatePhotos(cardElement.querySelector('.popup__photos'), data);
-  cardsList.append(cardElement);
+
+  return cardElement;
 };
 
 export {createCard};
