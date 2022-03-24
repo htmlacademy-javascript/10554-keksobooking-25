@@ -53,7 +53,7 @@ const onSelectChange = (evt) => {
 
 mainForm.addEventListener('change', onSelectChange);
 
-const priceRange = {
+const PRICE_RANGE = {
   'bungalow': '0',
   'flat': '1000',
   'hotel': '3000',
@@ -63,8 +63,8 @@ const priceRange = {
 
 const priceTermChange = (evt) => {
   if (evt.target.matches('[name="type"]')) {
-    price.placeholder = `От ${priceRange[evt.target.value]}`;
-    price.dataset.startPrice = priceRange[evt.target.value];
+    price.placeholder = `От ${PRICE_RANGE[evt.target.value]}`;
+    price.dataset.startPrice = PRICE_RANGE[evt.target.value];
   }
 };
 

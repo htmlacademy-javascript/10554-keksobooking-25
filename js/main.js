@@ -1,8 +1,4 @@
-import { createCard } from './create-card.js';
-import { getSimilarObjects } from './data.js';
 import './form-validation.js';
-
-const similarCards = getSimilarObjects();
-
-createCard(similarCards[0]);
+import './no-ui-slider.js';
+import './leaflet-map.js';
 
