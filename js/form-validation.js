@@ -70,7 +70,4 @@ const priceTermChange = (evt) => {
 
 mainForm.addEventListener('change', priceTermChange);
 
-mainForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  pristine.validate();
-});
+export {pristine};

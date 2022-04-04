@@ -637,6 +637,11 @@ fieldset {
   border-radius: 8px;
 }
 
+.ad-form__submit:disabled {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
 .ad-form__submit:hover,
 .ad-form__submit:focus {
   border-color: #ff6d51;
@@ -955,7 +960,8 @@ fieldset {
  */
 
 .success,
-.error {
+.error,
+.server-error {
   position: fixed;
   top: 0;
   left: 0;
@@ -976,8 +982,14 @@ fieldset {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
+.remove-block {
+  display: none;
+}
+
 .success__message,
-.error__message {
+.error__message,
+.server-error__message,
+.server-error__text {
   position: relative;
 
   color: #ffffff;

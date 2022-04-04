@@ -93,7 +93,7 @@
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--wide">
           <label class="ad-form__label" for="address">Адрес (координаты)</label>
-          <input id="address" name="address" type="text" value="LatLng(35.697567, 139.766556)" readonly>
+          <input id="address" name="address" type="text" value="" readonly>
         </fieldset>
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="type">Тип жилья</label>
@@ -230,6 +230,13 @@
     <div class="error">
       <p class="error__message">Ошибка размещения объявления</p>
       <button type="button" class="error__button">Попробовать снова</button>
+    </div>
+  </template>
+
+  <!-- Сообщение об ошибке сервера -->
+  <template id="server-error">
+    <div class="server-error">
+      <p class="server-error__text">Мы не смогли загрузить метки на карту :(</p>
     </div>
   </template>
 <script src="pristine/pristine.min.js"></script>
