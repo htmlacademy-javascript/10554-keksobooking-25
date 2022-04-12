@@ -1,22 +1,22 @@
-import {enableInactiveState, enableActiveState} from './control-form.js';
+import {enableInactiveState, enableActiveStateForm, enableActiveStateFilter} from './control-form.js';
 import { createCard } from './create-card.js';
 import { getData } from './data-api.js';
 import {onErrorGetServer} from './control-msg.js';
 
 enableInactiveState();
 
-const startLatData = 35.69756;
-const startLngData = 139.76655;
+const START_LAT_DATA = 35.69756;
+const START_LNG_DATA = 139.76655;
 
 
 const map = L.map('map-canvas')
   .on('load', () => {
-    enableActiveState();
-    document.querySelector('[name="address"]').value = `${startLatData}, ${startLngData}`;
+    enableActiveStateForm();
+    document.querySelector('[name="address"]').value = `${START_LAT_DATA}, ${START_LNG_DATA}`;
   })
   .setView({
-    lat: startLatData,
-    lng: startLngData,
+    lat: START_LAT_DATA,
+    lng: START_LNG_DATA,
   }, 12);
 
 L.tileLayer(
@@ -35,8 +35,8 @@ const mainPinIcon = L.icon({
 
 const mainMarker = L.marker(
   {
-    lat: startLatData,
-    lng: startLngData,
+    lat: START_LAT_DATA,
+    lng: START_LNG_DATA,
   },
   {
     draggable: true,
@@ -46,7 +46,7 @@ const mainMarker = L.marker(
 
 mainMarker.addTo(map);
 
-mainMarker.on('moveend', (evt) => {
+mainMarker.on('move', (evt) => {
   document.querySelector('[name="address"]').value = `${evt.target.getLatLng().lat.toFixed(5)}, ${evt.target.getLatLng().lng.toFixed(5)}`;
 });
 
@@ -60,6 +60,7 @@ const icon = L.icon({
 const markerGroup = L.layerGroup().addTo(map);
 
 const createMarker = (data) => {
+  markerGroup.clearLayers();
   const markers = data.slice(0, 10);
   markers.forEach((item) => {
     const marker = L.marker({
@@ -74,8 +75,9 @@ const createMarker = (data) => {
       .addTo(markerGroup)
       .bindPopup(createCard(item));
   });
+  enableActiveStateFilter();
 };
 
 getData(createMarker, onErrorGetServer);
 
-export {startLatData, startLngData, map, mainMarker};
+export {START_LAT_DATA, START_LNG_DATA, map, mainMarker, createMarker};

@@ -2,7 +2,7 @@ const serverErrorTemplate = document.querySelector('#server-error').content.quer
 const successPopupTemplate = document.querySelector('#success').content.querySelector('.success');
 const errorPopupTemplate = document.querySelector('#error').content.querySelector('.error');
 
-const closeClickMsgPopup = (target) => {
+const closeClickMessagePopup = (target) => {
   target.addEventListener('click', (evt) => {
     if (evt.target === target || evt.target.matches('.error__button')) {
       target.classList.remove('active');
@@ -11,7 +11,7 @@ const closeClickMsgPopup = (target) => {
   }, {once: true});
 };
 
-const closeEsckMsgPopup = (target) => {
+const closeEsckMessagePopup = (target) => {
   document.addEventListener('keydown', (evt) => {
     if(target.classList.contains('active')){
       if (evt.key === 'Escape') {
@@ -26,24 +26,24 @@ const onErrorGetServer = () => {
   const popupElement = serverErrorTemplate.cloneNode(true);
   document.querySelector('body').append(popupElement);
   popupElement.classList.add('active');
-  closeClickMsgPopup(popupElement);
-  closeEsckMsgPopup(popupElement);
+  closeClickMessagePopup(popupElement);
+  closeEsckMessagePopup(popupElement);
 };
 
-const onSuccessSubmit = () => {
+const onSuccessPost = () => {
   const popupElement = successPopupTemplate.cloneNode(true);
   document.querySelector('body').append(popupElement);
   popupElement.classList.add('active');
-  closeClickMsgPopup(popupElement);
-  closeEsckMsgPopup(popupElement);
+  closeClickMessagePopup(popupElement);
+  closeEsckMessagePopup(popupElement);
 };
 
-const onErrorSubmit = () => {
+const onErrorPost = () => {
   const popupElement = errorPopupTemplate.cloneNode(true);
   document.querySelector('body').append(popupElement);
   popupElement.classList.add('active');
-  closeClickMsgPopup(popupElement);
-  closeEsckMsgPopup(popupElement);
+  closeClickMessagePopup(popupElement);
+  closeEsckMessagePopup(popupElement);
 };
 
-export {onErrorGetServer, onSuccessSubmit, onErrorSubmit};
+export {onErrorGetServer, onSuccessPost, onErrorPost};

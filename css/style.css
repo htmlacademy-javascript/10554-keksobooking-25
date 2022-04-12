@@ -607,11 +607,25 @@ fieldset {
   margin-right: 10px;
   margin-bottom: 10px;
 
-  width: 70px;
+  min-width: 70px;
   height: 70px;
 
   background-color: #e4e4de;
   border-radius: 5px;
+
+  display: flex;
+  align-items: center;
+}
+
+.ad-form__photo img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  margin-left: 5px;
+}
+
+.ad-form__photo img:last-child {
+  margin-right: 5px;
 }
 
 .ad-form__element--submit {

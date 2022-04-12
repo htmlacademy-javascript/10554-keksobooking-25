@@ -1,7 +1,8 @@
 import { pristine } from './form-validation.js';
-import { sendData } from './data-api.js';
-import { onSuccessSubmit, onErrorSubmit } from './control-msg.js';
-import { startLatData, startLngData, map, mainMarker } from './leaflet-map.js';
+import { sendData, getData } from './data-api.js';
+import { onSuccessPost, onErrorPost, onErrorGetServer } from './control-msg.js';
+import { START_LAT_DATA, START_LNG_DATA, map, mainMarker, createMarker } from './leaflet-map.js';
+import { getAvatarPreviewDefault,  getImagesPreviewDefault} from './image-preview.js';
 
 const mainForm = document.querySelector('.ad-form');
 const mainFormChildren = mainForm.querySelectorAll('fieldset');
@@ -21,11 +22,14 @@ const enableInactiveState = () => {
   });
 };
 
-const enableActiveState = () => {
+const enableActiveStateForm = () => {
   mainForm.classList.remove('ad-form--disabled');
   mainFormChildren.forEach((item) => {
     item.removeAttribute('disabled');
   });
+};
+
+const enableActiveStateFilter = () => {
   mapFilter.classList.remove('ad-form--disabled');
   mapFilterChildren.forEach((item) => {
     item.removeAttribute('disabled');
@@ -45,41 +49,48 @@ const unblockSubmitButton = () => {
 const resetForms = () => {
   document.querySelector('.ad-form').reset();
   document.querySelector('.map__filters').reset();
+  getAvatarPreviewDefault();
+  getImagesPreviewDefault();
+  getData(createMarker, onErrorGetServer);
+  map.closePopup();
   mainMarker.setLatLng({
-    lat: startLatData,
-    lng: startLngData,
+    lat: START_LAT_DATA,
+    lng: START_LNG_DATA,
   });
   map.setView({
-    lat: startLatData,
-    lng: startLngData,
+    lat: START_LAT_DATA,
+    lng: START_LNG_DATA,
   }, 12);
-  document.querySelector('[name="address"]').value = `${startLatData}, ${startLngData}`;
+  document.querySelector('[name="address"]').value = `${START_LAT_DATA}, ${START_LNG_DATA}`;
 };
 
 const resetFormByButton = () => {
   resetButton.addEventListener('click', (evt) => {
     evt.preventDefault();
+    getAvatarPreviewDefault();
+    getImagesPreviewDefault();
     resetForms();
   });
 };
 
-const sendUserForm = () => {
+const onSuccessSubmit = () => {
+  onSuccessPost();
+  unblockSubmitButton();
+  resetForms();
+};
+
+const onErrorSubmit = () => {
+  onErrorPost();
+  unblockSubmitButton();
+};
+
+const listeningUserForm = () => {
   mainForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
     blockSubmitButton();
     if (isValid) {
-      sendData(
-        () => {
-          onSuccessSubmit();
-          unblockSubmitButton();
-          resetForms();
-        },
-        () => {
-          onErrorSubmit();
-          unblockSubmitButton();
-        },
-        new FormData(evt.target));
+      sendData(onSuccessSubmit, onErrorSubmit, new FormData(evt.target));
     } else {
       unblockSubmitButton();
     }
@@ -87,4 +98,4 @@ const sendUserForm = () => {
 };
 
 
-export {enableInactiveState, enableActiveState, sendUserForm, resetFormByButton};
+export {enableInactiveState, enableActiveStateForm, enableActiveStateFilter, listeningUserForm, resetFormByButton};
