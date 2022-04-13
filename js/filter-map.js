@@ -24,7 +24,7 @@ const checkPrice = (data) => {
 };
 
 
-const conformityCheck = (data) => {
+const checkConformity = (data) => {
   let rank = 0;
   const filterFeaturesValues = [];
 
@@ -94,7 +94,7 @@ const getMaxRank = () => {
 const sortMarkers = (data) => {
   const maxRank = getMaxRank();
 
-  const filtered = data.filter((el)=>conformityCheck(el) === maxRank);
+  const filtered = data.filter((el)=>checkConformity(el) === maxRank);
 
   createMarker(filtered);
 };

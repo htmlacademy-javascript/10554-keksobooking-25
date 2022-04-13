@@ -3,7 +3,7 @@ import './no-ui-slider.js';
 import './leaflet-map.js';
 import './image-preview.js';
 import './filter-map.js';
-import { listeningUserForm, resetFormByButton } from './control-form.js';
+import { listenUserForm, resetFormByButton } from './control-form.js';
 
-listeningUserForm();
+listenUserForm();
 resetFormByButton();
