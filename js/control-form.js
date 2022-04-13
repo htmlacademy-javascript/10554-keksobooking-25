@@ -84,7 +84,7 @@ const onErrorSubmit = () => {
   unblockSubmitButton();
 };
 
-const listeningUserForm = () => {
+const listenUserForm = () => {
   mainForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
@@ -98,4 +98,4 @@ const listeningUserForm = () => {
 };
 
 
-export {enableInactiveState, enableActiveStateForm, enableActiveStateFilter, listeningUserForm, resetFormByButton};
+export {enableInactiveState, enableActiveStateForm, enableActiveStateFilter, listenUserForm, resetFormByButton};
