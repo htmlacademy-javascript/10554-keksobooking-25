@@ -42,5 +42,13 @@ const createRandomLng = (startRange, endRange, symbolsCount) => {
   return randomLng;
 };
 
+const debounce = ( callback, delay ) => {
+  let timeout;
+  return function() {
+    clearTimeout( timeout );
+    timeout = setTimeout( callback, delay );
+  };
+};
 
-export {getRandomInteger, getArrayRandElement, getArrayRandElementsList, createRandomLat, createRandomLng};
+
+export {debounce, getRandomInteger, getArrayRandElement, getArrayRandElementsList, createRandomLat, createRandomLng};
