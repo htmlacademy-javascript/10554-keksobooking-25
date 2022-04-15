@@ -10,13 +10,14 @@ const mapFilter = document.querySelector('.map__filters');
 const mapFilterChildren = mapFilter.querySelectorAll('.map__filter');
 const submitButton = mainForm.querySelector('.ad-form__submit');
 const resetButton = mainForm.querySelector('.ad-form__reset');
+const addressCoordinates = document.querySelector('[name="address"]');
 
 const enableInactiveState = () => {
   mainForm.classList.add('ad-form--disabled');
   mainFormChildren.forEach((item) => {
     item.setAttribute('disabled', 'disabled');
   });
-  mapFilter.classList.add('ad-form--disabled');
+  mapFilter.classList.add('map__filters--disabled');
   mapFilterChildren.forEach((item) => {
     item.setAttribute('disabled', 'disabled');
   });
@@ -30,7 +31,7 @@ const enableActiveStateForm = () => {
 };
 
 const enableActiveStateFilter = () => {
-  mapFilter.classList.remove('ad-form--disabled');
+  mapFilter.classList.remove('map__filters--disabled');
   mapFilterChildren.forEach((item) => {
     item.removeAttribute('disabled');
   });
@@ -47,8 +48,8 @@ const unblockSubmitButton = () => {
 };
 
 const resetForms = () => {
-  document.querySelector('.ad-form').reset();
-  document.querySelector('.map__filters').reset();
+  mainForm.reset();
+  mapFilter.reset();
   getAvatarPreviewDefault();
   getImagesPreviewDefault();
   getData(createMarker, onErrorGetServer);
@@ -61,7 +62,7 @@ const resetForms = () => {
     lat: START_LAT_DATA,
     lng: START_LNG_DATA,
   }, 12);
-  document.querySelector('[name="address"]').value = `${START_LAT_DATA}, ${START_LNG_DATA}`;
+  addressCoordinates.value = `${START_LAT_DATA}, ${START_LNG_DATA}`;
 };
 
 const resetFormByButton = () => {
