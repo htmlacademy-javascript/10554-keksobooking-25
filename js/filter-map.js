@@ -3,6 +3,9 @@ import { onErrorGetServer } from './control-msg.js';
 import { createMarker } from './leaflet-map.js';
 import { debounce } from './util.js';
 
+const LOW_PRICE = 10000;
+const HIGH_PRICE = 50000;
+
 const mapFilter = document.querySelector('.map__filters');
 const houseTypeFilter = document.querySelector('#housing-type');
 const priceFilter = document.querySelector('#housing-price');
@@ -12,13 +15,13 @@ const houseFeatures = document.querySelectorAll('.map__checkbox');
 
 
 const checkPrice = (data) => {
-  if (+data.offer.price > 10000 && +data.offer.price < 50000) {
+  if (+data.offer.price > LOW_PRICE && +data.offer.price < HIGH_PRICE) {
     return 'middle';
   }
-  if (+data.offer.price < 10000) {
+  if (+data.offer.price < LOW_PRICE) {
     return 'low';
   }
-  if (+data.offer.price > 50000) {
+  if (+data.offer.price > HIGH_PRICE) {
     return 'high';
   }
 };

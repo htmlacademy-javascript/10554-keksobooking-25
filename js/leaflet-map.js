@@ -3,16 +3,16 @@ import { createCard } from './create-card.js';
 import { getData } from './data-api.js';
 import {onErrorGetServer} from './control-msg.js';
 
-enableInactiveState();
-
 const START_LAT_DATA = 35.69756;
 const START_LNG_DATA = 139.76655;
+const addressCoordinates = document.querySelector('[name="address"]');
 
+enableInactiveState();
 
 const map = L.map('map-canvas')
   .on('load', () => {
     enableActiveStateForm();
-    document.querySelector('[name="address"]').value = `${START_LAT_DATA}, ${START_LNG_DATA}`;
+    addressCoordinates.value = `${START_LAT_DATA}, ${START_LNG_DATA}`;
   })
   .setView({
     lat: START_LAT_DATA,
@@ -47,7 +47,7 @@ const mainMarker = L.marker(
 mainMarker.addTo(map);
 
 mainMarker.on('move', (evt) => {
-  document.querySelector('[name="address"]').value = `${evt.target.getLatLng().lat.toFixed(5)}, ${evt.target.getLatLng().lng.toFixed(5)}`;
+  addressCoordinates.value = `${evt.target.getLatLng().lat.toFixed(5)}, ${evt.target.getLatLng().lng.toFixed(5)}`;
 });
 
 
