@@ -36,6 +36,7 @@ const generatePhotos = (parentBlock, data) => {
   }
 };
 
+
 const createCard = (data) => {
   const cardElement = similarCardTemplate.cloneNode(true);
   if(data.author.avatar !== undefined){

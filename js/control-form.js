@@ -1,7 +1,7 @@
 import { pristine } from './form-validation.js';
-import { sendData, getData } from './data-api.js';
-import { onSuccessPost, onErrorPost, onErrorGetServer } from './control-msg.js';
-import { START_LAT_DATA, START_LNG_DATA, map, mainMarker, createMarker } from './leaflet-map.js';
+import { sendData} from './data-api.js';
+import { onSuccessPost, onErrorPost} from './control-msg.js';
+import { START_LAT_DATA, START_LNG_DATA, resetMap, createMarker } from './leaflet-map.js';
 import { getAvatarPreviewDefault,  getImagesPreviewDefault} from './image-preview.js';
 
 const mainForm = document.querySelector('.ad-form');
@@ -15,25 +15,25 @@ const addressCoordinates = document.querySelector('[name="address"]');
 const enableInactiveState = () => {
   mainForm.classList.add('ad-form--disabled');
   mainFormChildren.forEach((item) => {
-    item.setAttribute('disabled', 'disabled');
+    item.disabled = true;
   });
   mapFilter.classList.add('map__filters--disabled');
   mapFilterChildren.forEach((item) => {
-    item.setAttribute('disabled', 'disabled');
+    item.disabled = true;
   });
 };
 
 const enableActiveStateForm = () => {
   mainForm.classList.remove('ad-form--disabled');
   mainFormChildren.forEach((item) => {
-    item.removeAttribute('disabled');
+    item.disabled = false;
   });
 };
 
 const enableActiveStateFilter = () => {
   mapFilter.classList.remove('map__filters--disabled');
   mapFilterChildren.forEach((item) => {
-    item.removeAttribute('disabled');
+    item.disabled = false;
   });
 };
 
@@ -47,37 +47,29 @@ const unblockSubmitButton = () => {
   submitButton.textContent = 'Опубликовать';
 };
 
-const resetForms = () => {
+const resetForms = (data) => {
   mainForm.reset();
   mapFilter.reset();
   getAvatarPreviewDefault();
   getImagesPreviewDefault();
-  getData(createMarker, onErrorGetServer);
-  map.closePopup();
-  mainMarker.setLatLng({
-    lat: START_LAT_DATA,
-    lng: START_LNG_DATA,
-  });
-  map.setView({
-    lat: START_LAT_DATA,
-    lng: START_LNG_DATA,
-  }, 12);
+  createMarker(data);
   addressCoordinates.value = `${START_LAT_DATA}, ${START_LNG_DATA}`;
+  resetMap();
 };
 
-const resetFormByButton = () => {
+const resetFormByButton = (data) => {
   resetButton.addEventListener('click', (evt) => {
     evt.preventDefault();
     getAvatarPreviewDefault();
     getImagesPreviewDefault();
-    resetForms();
+    resetForms(data);
   });
 };
 
-const onSuccessSubmit = () => {
+const onSuccessSubmit = (data) => {
   onSuccessPost();
   unblockSubmitButton();
-  resetForms();
+  resetForms(data);
 };
 
 const onErrorSubmit = () => {
@@ -85,7 +77,8 @@ const onErrorSubmit = () => {
   unblockSubmitButton();
 };
 
-const listenUserForm = () => {
+const listenUserForm = (data) => {
+  resetFormByButton(data);
   mainForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
@@ -99,4 +92,4 @@ const listenUserForm = () => {
 };
 
 
-export {enableInactiveState, enableActiveStateForm, enableActiveStateFilter, listenUserForm, resetFormByButton};
+export {enableInactiveState, enableActiveStateForm, enableActiveStateFilter, listenUserForm};
