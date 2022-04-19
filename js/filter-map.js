@@ -1,10 +1,9 @@
-import { getData } from './data-api.js';
-import { onErrorGetServer } from './control-msg.js';
 import { createMarker } from './leaflet-map.js';
 import { debounce } from './util.js';
 
 const LOW_PRICE = 10000;
 const HIGH_PRICE = 50000;
+const DEBOUNCE_DELAY = 500;
 
 const mapFilter = document.querySelector('.map__filters');
 const houseTypeFilter = document.querySelector('#housing-type');
@@ -100,7 +99,12 @@ const sortMarkers = (data) => {
   const filtered = data.filter((el)=>checkConformity(el) === maxRank);
 
   createMarker(filtered);
+
+};
+
+const addFilterListener = (data) => {
+  mapFilter.addEventListener('change', debounce(() => sortMarkers(data), DEBOUNCE_DELAY));
 };
 
 
-mapFilter.addEventListener('change', debounce(() => getData(sortMarkers, onErrorGetServer), 500));
+export {addFilterListener};

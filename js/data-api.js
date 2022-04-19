@@ -1,10 +1,11 @@
+const GET_REQUEST = 'https://25.javascript.pages.academy/keksobooking/data';
+const POST_REQUEST = 'https://25.javascript.pages.academy/keksobookin';
+
 const getData = (onSuccess, onError) => {
-  fetch('https://25.javascript.pages.academy/keksobooking/data')
+  fetch(GET_REQUEST)
     .then((response) => {
       if (response.ok) {
         return response.json();
-      } else {
-        onError();
       }
     })
     .then((data) => {
@@ -17,7 +18,7 @@ const getData = (onSuccess, onError) => {
 
 const sendData = (onSuccess, onFail, body) => {
   fetch(
-    'https://25.javascript.pages.academy/keksobooking',
+    POST_REQUEST,
     {
       method: 'POST',
       body,
