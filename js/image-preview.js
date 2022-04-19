@@ -22,16 +22,16 @@ const getAvatarPreviewDefault = () => {
 };
 
 adFormImagesChooser.addEventListener('change', () => {
-  const fileItems = adFormImagesChooser.files;
-  for(let i = 0; i < fileItems.length; i++) {
-    const fileName = fileItems[i].name.toLowerCase();
+  const fileItems = Array.from(adFormImagesChooser.files);
+  fileItems.forEach((fileItem)=> {
+    const fileName = fileItem.name.toLowerCase();
     const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
     if (matches) {
       const imageBlock = document.createElement('img');
-      imageBlock.src = URL.createObjectURL(fileItems[i]);
+      imageBlock.src = URL.createObjectURL(fileItem);
       adImagesPreview.append(imageBlock);
     }
-  }
+  });
 
 });
 

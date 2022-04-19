@@ -72,6 +72,7 @@ mainMarker.on('move', (evt) => {
 
 const loadMap = () => {
   map.on('load', () => {
+    enableActiveStateForm();
     getData(onGetDataFromServer, onErrorGetServer);
     addressCoordinates.value = `${START_LAT_DATA}, ${START_LNG_DATA}`;
   })
@@ -86,7 +87,7 @@ const loadMap = () => {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     },
   ).addTo(map);
-  map.whenReady(enableActiveStateForm);
+
 };
 
 const resetMap = () => {
