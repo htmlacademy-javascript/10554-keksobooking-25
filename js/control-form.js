@@ -12,16 +12,6 @@ const submitButton = mainForm.querySelector('.ad-form__submit');
 const resetButton = mainForm.querySelector('.ad-form__reset');
 const addressCoordinates = document.querySelector('[name="address"]');
 
-const enableInactiveState = () => {
-  mainForm.classList.add('ad-form--disabled');
-  mainFormChildren.forEach((item) => {
-    item.disabled = true;
-  });
-  mapFilter.classList.add('map__filters--disabled');
-  mapFilterChildren.forEach((item) => {
-    item.disabled = true;
-  });
-};
 
 const enableActiveStateForm = () => {
   mainForm.classList.remove('ad-form--disabled');
@@ -92,4 +82,4 @@ const listenUserForm = (data) => {
 };
 
 
-export {enableInactiveState, enableActiveStateForm, enableActiveStateFilter, listenUserForm};
+export { enableActiveStateForm, enableActiveStateFilter, listenUserForm};
