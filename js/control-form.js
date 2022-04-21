@@ -74,7 +74,7 @@ const listenUserForm = (data) => {
     const isValid = pristine.validate();
     blockSubmitButton();
     if (isValid) {
-      sendData(onSuccessSubmit, onErrorSubmit, new FormData(evt.target));
+      sendData(()=>{onSuccessSubmit(data);}, onErrorSubmit, new FormData(evt.target));
     } else {
       unblockSubmitButton();
     }
